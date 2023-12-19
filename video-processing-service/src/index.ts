@@ -1,5 +1,6 @@
 import express from "express";
 import ffmpeg from "fluent-ffmpeg";
+import * as fs from "fs";
 
 const app = express();
 app.use(express.json());
@@ -9,9 +10,14 @@ app.post("/process-video", (req, res) => {
   const inputFilePath = req.body.inputFilePath;
   const outputFilePath = req.body.outputFilePath;
 
-  // Check if the input file path is defined
-  if (!inputFilePath || !outputFilePath) {
+  // Check if the input file path is defined and exists
+  const isMissingPath = !inputFilePath || !outputFilePath;
+  const isInvalidInputPath = !fs.existsSync(inputFilePath);
+
+  if (isMissingPath) {
     return res.status(400).send("Bad Request: Missing file path");
+  } else if (isInvalidInputPath) {
+    return res.status(400).send("Bad Request: Invalid input file path");
   }
 
   // Create the ffmpeg command
