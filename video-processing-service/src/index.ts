@@ -3,6 +3,8 @@ import ffmpeg from "fluent-ffmpeg";
 import * as fs from "fs";
 
 const app = express();
+
+// Specify JSON request body
 app.use(express.json());
 
 app.post("/process-video", (req, res) => {
