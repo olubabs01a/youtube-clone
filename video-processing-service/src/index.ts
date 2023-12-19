@@ -24,11 +24,11 @@ app.post("/process-video", (req, res) => {
   ffmpeg(inputFilePath)
     .outputOptions("-vf", "scale=-1:360") // 360p
     .on("end", function () {
-      console.log("Processing finished successfully");
+      console.info("Processing finished successfully");
       res.status(200).send("Processing finished successfully");
     })
     .on("error", function (err: any) {
-      console.log("An error occurred: " + err.message);
+      console.error("An error occurred: " + err.message);
       res.status(500).send("An error occurred: " + err.message);
     })
     .save(outputFilePath);
