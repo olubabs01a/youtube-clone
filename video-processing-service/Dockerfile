@@ -29,6 +29,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install only production dependencies
+RUN npm install husky -g
 RUN npm install --only=production
 
 # Copy built app from the builder stage
