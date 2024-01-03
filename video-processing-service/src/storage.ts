@@ -13,6 +13,17 @@ export function setupDirectories() {
 }
 
 /**
+ * Ensures a directory exists, creating it if necessary.
+ * @param {string} dirPath - The directory path to check.
+ */
+function ensureDirectoryExistence(dirPath: string) {
+    if (fs.existsSync(dirPath) === false) {
+        fs.mkdirSync(dirPath, { recursive: true });
+        console.log(`Directory created at '${dirPath}'.`);
+    }
+}
+
+/**
  * Convert provided raw video and save as provided processed file name.
  * @param rawVideoName - The name of the file to convert from {@link localRawVideoPath}
  * @param processedVideoName - The name of the file to convert to {@link localProcessedVideoPath}
