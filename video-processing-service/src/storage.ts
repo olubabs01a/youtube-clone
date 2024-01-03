@@ -33,3 +33,35 @@ export function convertVideo(rawVideoName: string, processedVideoName: string) {
             .save(`${processedVideoPath}/${processedVideoName}`);
     });
 }
+
+/**
+ * @param fileName - The name of the file to download from the
+ * {@link rawVideoBucketName} bucket into the {@link localRawVideoPath} folder.
+ * @returns A promise that resolves when the file has been downloaded.
+ */
+export async function downloadRawVideo(fileName: string) {
+    await storage.bucket(rawVideoBucketName)
+        .file(fileName)
+        .download({ destination: `${localRawVideoPath}/${fileName}` });
+
+    console.log(`
+        'gs://${rawVideoBucketName}/${fileName}' downloaded to '${localRawVideoPath}/${fileName}'`
+    );
+}
+
+/**
+ * @param fileName - The name of the file to download from the
+ * {@link localProcessedVideoPath} folder into the bucket {@link processedVideoBucketName}.
+ * @returns A promise that resolves when the file has been uploaded.
+ */
+export async function uploadProcessedVideo(fileName: string) {
+    const bucket = storage.bucket(processedVideoBucketName);
+
+    await bucket.upload(`${localProcessedVideoPath}/${fileName}`, { destination: fileName });
+
+    await bucket.file(fileName).makePublic();
+
+    console.log(`
+        '${localRawVideoPath}/${fileName}' uploaded to 'gs://${processedVideoBucketName}/${fileName}'`
+    );
+}
