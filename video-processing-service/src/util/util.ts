@@ -10,7 +10,7 @@ export function isNullOrUndefined(obj: any): obj is null | undefined {
  * @param obj - Object to validate as non-null.
  * @returns {boolean}
  */
-export function isNullOrEmptyObject(obj: any) {
+export function isNullOrEmptyObject(obj: any): obj is null | undefined {
   if (isNullOrUndefined(obj)) {
     return true;
   } else if (typeof obj !== "object") {
@@ -24,7 +24,7 @@ export function isNullOrEmptyObject(obj: any) {
  * @param obj - Object to validate as non-empty string.
  * @returns {boolean}
  */
-export function isNullOrEmptyString(obj: any) {
+export function isNullOrEmptyString(obj: any): obj is null | undefined {
   if (isNullOrUndefined(obj)) {
     return true;
   } else if (typeof obj !== "string") {

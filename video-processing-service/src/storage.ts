@@ -1,10 +1,10 @@
 import { Storage } from "@google-cloud/storage";
 import fs from "fs";
 import ffmpeg from "fluent-ffmpeg";
-import { Config } from "./configuration/config";
+import { loadConfiguration } from "./configuration/config";
 
 // Import configuration
-const config: Config = require("./configuration/config.json");
+const config = loadConfiguration();
 const localRawVideoPath = config.localRawVideoPath;
 const localProcessedVideoPath = config.localProcessedVideoPath;
 const rawVideoBucketName = config.rawVideoBucketName;
