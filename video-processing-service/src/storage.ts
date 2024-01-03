@@ -5,6 +5,10 @@ import { Config } from "./configuration/config";
 
 // Import configuration
 const config: Config = require("./configuration/config.json");
+const localRawVideoPath = config.localRawVideoPath;
+const localProcessedVideoPath = config.localProcessedVideoPath;
+const rawVideoBucketName = config.rawVideoBucketName;
+const processedVideoBucketName = config.processedVideoBucketName;
 
 // Creates a client
 const storage = new Storage();
@@ -13,13 +17,13 @@ const storage = new Storage();
  * Creates directories for raw and processed videos
  */
 export function setupDirectories() {
-  ensureDirectoryExistence(config.localRawVideoPath);
-  ensureDirectoryExistence(config.localProcessedVideoPath);
+  ensureDirectoryExistence(localRawVideoPath);
+  ensureDirectoryExistence(localProcessedVideoPath);
 
   // Setup bucket if cloud is enabled
   if (config.isCloudEnabled) {
-    ensureBucketExistence(config.rawVideoBucketName);
-    ensureBucketExistence(config.processedVideoBucketName);
+    ensureBucketExistence(rawVideoBucketName);
+    ensureBucketExistence(processedVideoBucketName);
   }
 }
 
@@ -70,7 +74,7 @@ export function convertVideo(rawVideoName: string, processedVideoName: string) {
         console.error(`An error occurred: ${err.message}`);
         reject(err);
       })
-      .save(`${processedVideoPath}/${processedVideoName}`);
+      .save(`${localProcessedVideoPath}/${processedVideoName}`);
   });
 }
 
