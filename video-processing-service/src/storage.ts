@@ -10,9 +10,12 @@ const config: Config = require("./configuration/config.json");
 const storage = new Storage();
 
 /**
- * Creates local directories for raw and processed videos
+ * Creates directories for raw and processed videos
  */
 export function setupDirectories() {
+    ensureDirectoryExistence(config.localRawVideoPath);
+    ensureDirectoryExistence(config.localProcessedVideoPath);
+}
 
 }
 
