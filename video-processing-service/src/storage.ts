@@ -15,8 +15,30 @@ const storage = new Storage();
 export function setupDirectories() {
     ensureDirectoryExistence(config.localRawVideoPath);
     ensureDirectoryExistence(config.localProcessedVideoPath);
+
+    // Setup bucket if cloud is enabled
+    if (config.isCloudEnabled) {
+        ensureBucketExistence(config.rawVideoBucketName);
+        ensureBucketExistence(config.processedVideoBucketName);
+    }
 }
 
+/**
+ * Ensures a bucket exists, creating it if necessary.
+ * @param {string} bucketName - THe name of the bucket to check.
+ */
+async function ensureBucketExistence(bucketName: string) {
+    try {
+        if (await storage.bucket(bucketName).exists()) {
+            console.log(`Bucket named '${bucketName}' found`);
+        } else {
+            console.log(`Bucket named '${bucketName}' not found. Creating now...`);
+            await storage.createBucket(bucketName);
+        }
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
 }
 
 /**
