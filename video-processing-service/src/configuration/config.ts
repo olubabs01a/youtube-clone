@@ -5,4 +5,5 @@ export interface Config {
   processedVideoBucketName: string;
   localRawVideoPath: string;
   localProcessedVideoPath: string;
+  gcpProjectId: string;
 }

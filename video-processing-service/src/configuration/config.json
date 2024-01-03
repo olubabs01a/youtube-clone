@@ -4,5 +4,6 @@
     "rawVideoBucketName": "",
     "processedVideoBucketName": "",
     "localRawVideoPath": "",
-    "localProcessedVideoPath": ""
+    "localProcessedVideoPath": "",
+    "gcpProjectId": ""
 }
