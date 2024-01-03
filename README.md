@@ -4,7 +4,8 @@ A simplified video sharing platform
 ### References
 - [googleapis/nodejs-pubsub](https://github.com/googleapis/nodejs-pubsub)
 - [googleapis/nodejs-storage](https://github.com/googleapis/nodejs-storage)
-
+- [Install the gcloud CLI](https://cloud.google.com/sdk/docs/install)
+- [Google Cloud Region Picker](https://cloud.withgoogle.com/region-picker)
 
 ### Future Improvements
 1. Use Terraform to spin up GCP resources
