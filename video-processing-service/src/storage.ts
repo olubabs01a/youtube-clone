@@ -65,3 +65,43 @@ export async function uploadProcessedVideo(fileName: string) {
         '${localRawVideoPath}/${fileName}' uploaded to 'gs://${processedVideoBucketName}/${fileName}'`
     );
 }
+
+/**
+ * @param fileName - The name of the file to delete from the
+ * {@link localRawVideoPath} folder.
+ * @returns A promise that resolves when the file has been deleted.
+ */
+export function deleteRawVideo(fileName: string): Promise<void> {
+    return deleteFile(`${localRawVideoPath}/${fileName}`);
+}
+
+/**
+ * @param fileName - The name of the file to delete from the
+ * {@link localProcessedVideoPath} folder.
+ * @returns A promise that resolves when the file has been deleted.
+ */
+export function deleteProcessedVideo(fileName: string): Promise<void> {
+    return deleteFile(`${localProcessedVideoPath}/${fileName}`);
+}
+
+/**
+ * @param filePath - The path of the file to delete.
+ * @returns A promise that resolves when the file has been deleted.
+ */
+function deleteFile(filePath: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+        if (fs.existsSync(filePath) === false) {
+            reject(`File '${filePath}' does not exist.`);
+        } else {
+            fs.unlink(filePath, err => {
+                if (err) {
+                    console.error(`Failed to delete file at '${filePath}'`, err);
+                    reject(err);
+                } else {
+                    console.log(`File deleted at '${filePath}'`);
+                    resolve();
+                }
+            });
+        }
+    });
+}
