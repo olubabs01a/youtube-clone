@@ -1,6 +1,10 @@
 import { Storage } from "@google-cloud/storage";
 import fs from "fs";
 import ffmpeg from "fluent-ffmpeg";
+import { Config } from "./configuration/config";
+
+// Import configuration
+const config: Config = require("./configuration/config.json");
 
 // Creates a client
 const storage = new Storage();
