@@ -1,0 +1,8 @@
+{
+    "isCloudEnabled": false,
+    "enableRequesterPays": false,
+    "rawVideoBucketName": "",
+    "processedVideoBucketName": "",
+    "localRawVideoPath": "",
+    "localProcessedVideoPath": ""
+}
