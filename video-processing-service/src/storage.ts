@@ -1,7 +1,8 @@
 import { Storage } from "@google-cloud/storage";
 import fs from "fs";
 import ffmpeg from "fluent-ffmpeg";
-import { loadConfiguration } from "./configuration/config";
+import { loadConfiguration } from "./configuration";
+import { isNullOrUndefined } from "./util";
 
 // Import configuration
 const config = loadConfiguration();

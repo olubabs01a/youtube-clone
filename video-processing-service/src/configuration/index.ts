@@ -1,4 +1,4 @@
-import { isNullOrEmptyString } from "../util/util";
+import { isNullOrEmptyString } from "../util";
 
 export interface Config {
   isCloudEnabled: boolean;
@@ -10,7 +10,7 @@ export interface Config {
   gcpProjectId: string;
 }
 
-let config: Config = require("./configuration/config.json");
+let config: Config = require("./config.json");
 
 /**
  * Loads and validates local and environment configuration variables provided.

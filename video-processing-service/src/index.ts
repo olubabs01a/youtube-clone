@@ -1,5 +1,5 @@
 import express from "express";
-import { isNullOrEmptyString } from "./util/util";
+import { isNullOrEmptyString } from "./util";
 import { convertVideo, deleteProcessedVideo, deleteRawVideo, downloadRawVideo, uploadProcessedVideo } from "./storage";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
