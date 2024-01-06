@@ -1,8 +1,9 @@
 import { Storage } from "@google-cloud/storage";
 import fs from "fs";
+import ffmpegStatic from "ffmpeg-static";
 import ffmpeg from "fluent-ffmpeg";
 import { loadConfiguration } from "./configuration";
-import { isNullOrUndefined } from "./util";
+import { isNullOrEmptyString, isNullOrUndefined } from "./util";
 
 // Import configuration
 const config = loadConfiguration();
@@ -10,6 +11,12 @@ const localRawVideoPath = config.localRawVideoPath;
 const localProcessedVideoPath = config.localProcessedVideoPath;
 const rawVideoBucketName = config.rawVideoBucketName;
 const processedVideoBucketName = config.processedVideoBucketName;
+
+// Setup ffmpeg
+// Tell fluent-ffmpeg where it can find FFmpeg
+if (isNullOrEmptyString(ffmpegStatic) === false) {
+  ffmpeg.setFfmpegPath(ffmpegStatic);
+}
 
 // Creates a client
 const storage = new Storage();
