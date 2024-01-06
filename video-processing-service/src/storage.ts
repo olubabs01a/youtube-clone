@@ -115,8 +115,7 @@ export async function uploadProcessedVideo(fileName: string) {
 
   await bucket.file(fileName).makePublic();
 
-  console.log(`
-        '${localRawVideoPath}/${fileName}' uploaded to 'gs://${processedVideoBucketName}/${fileName}'`
+  console.log(`'${localRawVideoPath}/${fileName}' uploaded to 'gs://${processedVideoBucketName}/${fileName}'`
   );
 }
 
