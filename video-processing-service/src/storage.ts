@@ -73,7 +73,7 @@ function ensureDirectoryExistence(dirPath: string) {
 export function convertVideo(rawVideoName: string, processedVideoName: string) {
   return new Promise<void>((resolve, reject) => {
     ffmpeg(`${localRawVideoPath}/${rawVideoName}`)
-      .outputOptions("-vf", "scale=-1:360") // 360p
+      .outputOptions("-vf", "scale=-2:360") // 360p
       .on("end", function () {
         console.info("Processing finished successfully");
         resolve();
