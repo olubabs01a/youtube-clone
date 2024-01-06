@@ -78,8 +78,11 @@ export function convertVideo(rawVideoName: string, processedVideoName: string) {
         console.info("Processing finished successfully");
         resolve();
       })
-      .on("error", (err) => {
+      .on("error", (err, stdout, stderr) => {
         console.error(`An error occurred: ${err.message}`);
+        console.log(`stdout:\n${stdout}`);
+        console.log(`stderr:\n${stderr}`);
+
         reject(err);
       })
       .save(`${localProcessedVideoPath}/${processedVideoName}`);
