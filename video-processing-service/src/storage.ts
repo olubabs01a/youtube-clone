@@ -96,8 +96,7 @@ export async function downloadRawVideo(fileName: string) {
     .file(fileName)
     .download({ destination: `${localRawVideoPath}/${fileName}` });
 
-  console.log(`
-        'gs://${rawVideoBucketName}/${fileName}' downloaded to '${localRawVideoPath}/${fileName}'`
+  console.log(`'gs://${rawVideoBucketName}/${fileName}' downloaded to '${localRawVideoPath}/${fileName}'`
   );
 }
 
