@@ -73,15 +73,15 @@ function ensureDirectoryExistence(dirPath: string) {
 export function convertVideo(rawVideoName: string, processedVideoName: string) {
   return new Promise<void>((resolve, reject) => {
     ffmpeg(`${localRawVideoPath}/${rawVideoName}`)
-      .outputOptions("-vf", "scale=-2:360") // 360p
+      .outputOptions("-vf", "scale=-1:360") // 360p
       .on("end", function () {
         console.info("Processing finished successfully");
         resolve();
       })
       .on("error", (err, stdout, stderr) => {
         console.error(`An error occurred: ${err.message}`);
-        console.log(`stdout:\n${stdout}`);
-        console.log(`stderr:\n${stderr}`);
+        isNullOrEmptyString(stdout) === false && console.log(`stdout:\n${stdout}`);
+        isNullOrEmptyString(stderr) === false && console.log(`stderr:\n${stderr}`);
 
         reject(err);
       })
