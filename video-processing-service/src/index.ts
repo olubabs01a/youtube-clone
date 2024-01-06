@@ -1,11 +1,14 @@
 import express from "express";
 import { isNullOrEmptyString } from "./util";
-import { convertVideo, deleteProcessedVideo, deleteRawVideo, downloadRawVideo, uploadProcessedVideo } from "./storage";
+import { convertVideo, deleteProcessedVideo, deleteRawVideo, downloadRawVideo, setupDirectories, uploadProcessedVideo } from "./storage";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { loadConfiguration } from "./configuration";
 
-const app = express();
+const config = loadConfiguration();
+setupDirectories();
 
 // Specify JSON request body
+const app = express();
 app.use(express.json());
 
 app.post("/process-video", async (req, res) => {
@@ -28,14 +31,18 @@ app.post("/process-video", async (req, res) => {
   const outputFileName = `processed-${inputFileName}`;
 
   // Download raw video from Cloud Storage
-  await downloadRawVideo(inputFileName);
+  if (config.isCloudEnabled) {
+    await downloadRawVideo(inputFileName);
+  }
 
   try {
     // Convert the video to 360p
     await convertVideo(inputFileName, outputFileName);
 
     // Upload the processed video to Cloud Storage
-    await uploadProcessedVideo(outputFileName);
+    if (config.isCloudEnabled) {
+      await uploadProcessedVideo(outputFileName);
+    }
   } catch (err) {
     console.error(err);
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(`${ReasonPhrases.INTERNAL_SERVER_ERROR}: Video Processing failed.`);

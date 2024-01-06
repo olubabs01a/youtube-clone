@@ -1,5 +1,5 @@
 {
-    "isCloudEnabled": false,
+    "isCloudEnabled": true,
     "enableRequesterPays": false,
     "rawVideoBucketName": "en1-yt-raw-vid3os",
     "processedVideoBucketName": "en1-yt-processed-vid3os",
