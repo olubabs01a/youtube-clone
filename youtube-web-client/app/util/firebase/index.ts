@@ -1,17 +1,13 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, User, UserCredential, Unsubscribe } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, User } from "firebase/auth";
+import { loadConfiguration } from "@/app/configuration";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "",
-  authDomain: "",
-  projectId: "",
-  appId: "",
-  measurementId: ""
-};
+const config = loadConfiguration();
+const firebaseConfig = { ...config.firebase, projectId: config.gcpProjectId };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
