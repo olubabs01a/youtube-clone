@@ -1,4 +1,4 @@
-.authAction {
+.upload {
     display: inline-block;
     border: 1px solid gray;
     color: #065fd4;
@@ -11,7 +11,7 @@
     margin: 0 0.25em;
 }
 
-.authAction:hover {
+.upload:hover {
     background-color: #bee0fd;
     border: 1px solid transparent;
 }

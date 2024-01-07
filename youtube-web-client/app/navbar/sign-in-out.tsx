@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import styles from "./sign-in-out.module.css";
-import { signInWithGoogle, signOut } from "../util/firebase";
+import { signInWithGoogle, signOut } from "../firebase";
 import { User } from "firebase/auth";
 
 interface SignInOutProps {

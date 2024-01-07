@@ -6,7 +6,8 @@ import SignInOut from "./sign-in-out";
 import styles from "./navbar.module.css";
 import { User } from "firebase/auth";
 import { useState, useEffect } from "react";
-import { onAuthStateChangedHelper } from "../util/firebase";
+import { onAuthStateChangedHelper } from "../firebase";
+import Upload from "./upload";
 
 export default function NavBar() {
 	const [user, setUser] = useState<User | null>(null);
@@ -24,7 +25,10 @@ export default function NavBar() {
 			<Link className={styles.logoContainer} href="/">
 				<Image width={90} height={20} src="/youtube-logo.svg" alt="YouTube Logo" />
 			</Link>
-			<SignInOut user={user} />
+			<div className={styles.action}>
+				{user !== null && <Upload />}
+				<SignInOut user={user} />
+			</div>
 		</nav>
 	);
 }
