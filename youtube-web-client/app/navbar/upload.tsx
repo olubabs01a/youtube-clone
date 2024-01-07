@@ -14,10 +14,10 @@ export default function Upload() {
 
 	const handleFileUpload = async (file: File) => {
 		try {
-			const response = await uploadVideo(file);
-			alert(`Upload successful! Response: ${JSON.stringify(response)}`);
+			await uploadVideo(file);
+			alert(`Upload successful!`);
 		} catch (error) {
-			const errorMessage = `File uplad failed: ${error}`;
+			const errorMessage = `File upload failed: ${error}`;
 			console.error(errorMessage);
 			alert(error);
 		}
