@@ -3,6 +3,7 @@ import { isNullOrEmptyString } from "./util";
 import { convertVideo, deleteProcessedVideo, deleteRawVideo, downloadRawVideo, setupDirectories, uploadProcessedVideo } from "./storage";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { loadConfiguration } from "./configuration";
+import { isVideoNew, setVideo } from "firestore";
 
 const config = loadConfiguration();
 setupDirectories();
@@ -27,8 +28,19 @@ app.post("/process-video", async (req, res) => {
     return res.status(StatusCodes.BAD_REQUEST).send(`${ReasonPhrases.BAD_REQUEST}: missing file name.`);
   }
 
-  const inputFileName = data.name;
+  const inputFileName = data.name; // In format of <UID>-<DATE>.<EXTENSION>
   const outputFileName = `processed-${inputFileName}`;
+  const videoId = inputFileName.split(".")[0];
+
+  if (await isVideoNew(videoId) === false) {
+    return res.status(StatusCodes.BAD_REQUEST).send(`${ReasonPhrases.BAD_REQUEST}: video already processing or processed.`);
+  } else {
+    await setVideo(videoId, {
+      id: videoId,
+      uid: videoId.split("-")[0],
+      status: "processing"
+    });
+  }
 
   // Download raw video from Cloud Storage
   if (config.isCloudEnabled) {
@@ -43,6 +55,11 @@ app.post("/process-video", async (req, res) => {
     if (config.isCloudEnabled) {
       await uploadProcessedVideo(outputFileName);
     }
+
+    await setVideo(videoId, {
+      status: "processed",
+      filename: outputFileName
+    });
   } catch (err) {
     console.error(err);
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(`${ReasonPhrases.INTERNAL_SERVER_ERROR}: Video Processing failed.`);
