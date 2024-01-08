@@ -5,5 +5,6 @@
     "processedVideoBucketName": "en1-yt-processed-vid3os",
     "localRawVideoPath": "./raw-videos",
     "localProcessedVideoPath": "./processed-videos",
+    "videoCollectionId": "videos",
     "gcpProjectId": ""
 }

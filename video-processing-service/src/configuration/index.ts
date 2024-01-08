@@ -7,6 +7,7 @@ export interface Config {
   processedVideoBucketName: string;
   localRawVideoPath: string;
   localProcessedVideoPath: string;
+  videoCollectionId: string;
   gcpProjectId: string;
 }
 
@@ -41,6 +42,12 @@ export function loadConfiguration(): Config {
     validationErrors.push("processedVideoBucketName");
   } else if (isNullOrEmptyString(process.env.processedVideoBucketName) === false) {
     config.processedVideoBucketName = process.env.processedVideoBucketName;
+  }
+
+  if (isNullOrEmptyString(process.env.videoCollectionId || config.videoCollectionId)) {
+    validationErrors.push("videoCollectionId");
+  } else if (isNullOrEmptyString(process.env.videoCollectionId) === false) {
+    config.videoCollectionId = process.env.videoCollectionId;
   }
 
   switch (process.env.isCloudEnabled?.toLowerCase() || "") {
