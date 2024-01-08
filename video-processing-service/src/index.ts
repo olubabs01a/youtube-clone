@@ -3,7 +3,7 @@ import { isNullOrEmptyString } from "./util";
 import { convertVideo, deleteProcessedVideo, deleteRawVideo, downloadRawVideo, setupDirectories, uploadProcessedVideo } from "./storage";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { loadConfiguration } from "./configuration";
-import { isVideoNew, setVideo } from "firestore";
+import { hasReachedMaxRetryCount, isRetry, isVideoNew, setVideo, updateRetryCount } from "./firestore";
 
 const config = loadConfiguration();
 setupDirectories();
@@ -33,7 +33,9 @@ app.post("/process-video", async (req, res) => {
   const videoId = inputFileName.split(".")[0];
 
   if (await isVideoNew(videoId) === false) {
-    return res.status(StatusCodes.BAD_REQUEST).send(`${ReasonPhrases.BAD_REQUEST}: video already processing or processed.`);
+    if (await isRetry(videoId) === false) {
+      return res.status(StatusCodes.BAD_REQUEST).send(`${ReasonPhrases.BAD_REQUEST}: video already processing or processed.`);
+    }
   } else {
     await setVideo(videoId, {
       id: videoId,
@@ -57,11 +59,22 @@ app.post("/process-video", async (req, res) => {
     }
 
     await setVideo(videoId, {
-      status: "processed",
+      status: "completed",
       filename: outputFileName
     });
   } catch (err) {
     console.error(err);
+
+    if (await hasReachedMaxRetryCount(videoId)) {
+      await setVideo(videoId, {
+        id: videoId,
+        uid: videoId.split("-")[0],
+        status: "error"
+      });
+    } else {
+      await updateRetryCount(videoId);
+    }
+
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(`${ReasonPhrases.INTERNAL_SERVER_ERROR}: Video Processing failed.`);
   } finally {
     // Cleanup working directories.

@@ -8,6 +8,7 @@ export interface Config {
   localRawVideoPath: string;
   localProcessedVideoPath: string;
   videoCollectionId: string;
+  maxRetryCount: number;
   gcpProjectId: string;
 }
 
@@ -48,6 +49,11 @@ export function loadConfiguration(): Config {
     validationErrors.push("videoCollectionId");
   } else if (isNullOrEmptyString(process.env.videoCollectionId) === false) {
     config.videoCollectionId = process.env.videoCollectionId;
+  }
+
+  if (config.maxRetryCount <= 0) {
+    config.maxRetryCount = 0;
+    console.log(`Maximum retry count is set to '${config.maxRetryCount}'.`);
   }
 
   switch (process.env.isCloudEnabled?.toLowerCase() || "") {
