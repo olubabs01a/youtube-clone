@@ -14,9 +14,10 @@ A simplified video sharing platform
 1. Use Terraform to spin up GCP resources
 1. Secure Configuration - limit hardcoded values
 1. Failed conversion retry limit - UI/email alert?
-1. Use signed URLs instead of public 
+1. Multi-video uploads
 1. Add timer to show countdown to upload URL expiration
-1. Add object lifecycle rules for storage buckets (make it trendy for a few hours - someone using an old url should see ew that's so last season)1. Split config into global vs local to resolve duplicates? Add global util
+1. Add object lifecycle rules for storage buckets (make it trendy for a few hours - someone using an old url should see ew that's so last season)
+1. Split config into global vs local to resolve duplicates? Add global util
 1. Look into deployment manager configuration
 1. Add monitoring
 1. Allow non-persist after download (user can decide to remove their video and original)
