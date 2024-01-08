@@ -1,0 +1,6 @@
+{
+    "userCollectionId": "users",
+    "videoCollectionId": "videos",
+    "rawVideoBucketName": "en1-yt-raw-vid3os",
+    "gcpProjectId": ""
+}
