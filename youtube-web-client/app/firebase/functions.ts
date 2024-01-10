@@ -1,4 +1,5 @@
 import { httpsCallable } from "firebase/functions";
+import { Video } from "@types";
 import { functions } from ".";
 
 const generateUploadUrl = httpsCallable(functions, "generateUploadUrl");
@@ -7,7 +8,7 @@ const getAllVideosFunction = httpsCallable(functions, "getAllVideos");
 
 export async function uploadVideo(file: File) {
   const response: any = await generateUploadUrl({
-    fileExtension: file.name.split('.').pop()
+    fileExtension: file.name.split(".").pop()
   });
 
   // Upload the file via signed URL
@@ -20,17 +21,6 @@ export async function uploadVideo(file: File) {
   });
 
   return;
-}
-
-type ProcessStatus = "processing" | "completed" | "error";
-
-interface Video {
-  id?: string,
-  uid?: string,
-  filename?: string,
-  status?: ProcessStatus,
-  title?: string,
-  description?: string
 }
 
 export async function getAllVideos() {

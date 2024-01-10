@@ -8,7 +8,12 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "strictNullChecks": true,
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "paths": {
+      "@configuration": ["../configuration"],
+      "@util": ["../util"],
+      "@types": ["../types"]
+    }
   },
   "include": ["src/**/*.json", "src/**/*.ts"],
   "exclude": ["node_modules"]

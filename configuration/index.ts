@@ -1,10 +1,19 @@
+interface FirebaseConfig {
+  apiKey: string;
+  authDomain: string;
+  appId: string;
+  measurementId: string;
+}
+
 export interface Config {
+  firebase: FirebaseConfig;
   isCloudEnabled: boolean;
   enableRequesterPays: boolean;
   rawVideoBucketName: string;
   processedVideoBucketName: string;
   localRawVideoPath: string;
   localProcessedVideoPath: string;
+  userCollectionId: string;
   videoCollectionId: string;
   maxRetryCount: number;
   gcpProjectId: string;
@@ -33,6 +42,26 @@ export function loadConfiguration(): Config {
 
   if (!config.processedVideoBucketName) {
     validationErrors.push("processedVideoBucketName");
+  }
+
+  if (!config.firebase.apiKey) {
+    validationErrors.push("firebase:apiKey");
+  }
+
+  if (!config.firebase.authDomain) {
+    validationErrors.push("firebase:authDomain");
+  }
+
+  if (!config.firebase.appId) {
+    validationErrors.push("firebase:appId");
+  }
+
+  if (!config.firebase.measurementId) {
+    validationErrors.push("firebase:measurementId");
+  }
+
+  if (!config.userCollectionId) {
+    validationErrors.push("userCollectionId");
   }
 
   if (!config.videoCollectionId) {

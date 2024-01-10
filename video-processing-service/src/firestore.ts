@@ -1,4 +1,5 @@
-import { loadConfiguration } from "./configuration";
+import { loadConfiguration } from "@configuration";
+import { Video } from "@types";
 import { credential } from "firebase-admin";
 import { initializeApp } from "firebase-admin/app";
 import { FieldValue, Firestore } from "firebase-admin/firestore";
@@ -16,18 +17,6 @@ const firestore = new Firestore();
 } */
 
 const config = loadConfiguration();
-
-type ProcessStatus = "processing" | "completed" | "error";
-
-export interface Video {
-  id?: string,
-  uid?: string,
-  filename?: string,
-  status?: ProcessStatus,
-  title?: string,
-  description?: string,
-  retryCount?: number
-}
 
 async function getVideo(videoId: string) {
   const snapshot = await firestore.collection(config.videoCollectionId).doc(videoId).get();

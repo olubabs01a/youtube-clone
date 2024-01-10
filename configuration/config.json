@@ -5,7 +5,14 @@
     "processedVideoBucketName": "",
     "localRawVideoPath": "./raw-videos",
     "localProcessedVideoPath": "./processed-videos",
+    "userCollectionId": "",
     "videoCollectionId": "",
     "maxRetryCount": 3,
-    "gcpProjectId": ""
+    "gcpProjectId": "",
+    "firebase": {
+        "apiKey": "",
+        "authDomain": "",
+        "appId": "",
+        "measurementId": ""
+    }
 }

@@ -2,7 +2,7 @@ import * as functions from "firebase-functions";
 import * as firebase from "firebase-admin";
 import {Storage} from "@google-cloud/storage";
 import {onCall} from "firebase-functions/v2/https";
-import {loadConfiguration} from "./configuration";
+import {loadConfiguration} from "@configuration";
 
 firebase.initializeApp();
 
@@ -49,17 +49,6 @@ export const generateUploadUrl = onCall({maxInstances: 1}, async (request) => {
   return {url, fileName, expires};
 });
 
-type ProcessStatus = "processing" | "completed" | "error";
-
-export interface Video {
-  id?: string,
-  uid?: string,
-  filename?: string,
-  status?: ProcessStatus,
-  title?: string,
-  description?: string
-}
-
 export const getUserVideos = onCall({maxInstances: 1}, async (request) => {
   // Check if user is authenticated.
   if (request.auth === undefined) {
@@ -81,4 +70,11 @@ export const getAllVideos = onCall({maxInstances: 1}, async () => {
   const querySnapshot =
     await firestore.collection(config.videoCollectionId).limit(10).get();
   return querySnapshot.docs.map((doc) => doc.data());
+});
+
+export const getUploaderName = onCall({maxInstances: 1}, async (request) => {
+  const name = 
+    await firestore.collection(config.userCollectionId)
+    .where("uid", "==", request.data.uid).limit(1).select("uname").get();
+  return name.docs[0].data();
 });

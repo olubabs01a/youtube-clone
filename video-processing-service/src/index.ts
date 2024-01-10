@@ -1,8 +1,8 @@
 import express from "express";
-import { isNullOrEmptyString } from "./util";
+import { isNullOrEmptyString } from "@util";
 import { convertVideo, deleteProcessedVideo, deleteRawVideo, downloadRawVideo, setupDirectories, uploadProcessedVideo } from "./storage";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
-import { loadConfiguration } from "./configuration";
+import { loadConfiguration } from "@configuration";
 import { hasReachedMaxRetryCount, isRetry, isVideoNew, setVideo, updateRetryCount } from "./firestore";
 
 const config = loadConfiguration();
