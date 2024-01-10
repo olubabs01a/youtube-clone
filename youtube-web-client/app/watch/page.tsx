@@ -7,7 +7,11 @@ import { loadConfiguration } from "@configuration";
 
 export default function Watch() {
 	const videoSrc = useSearchParams().get("v");
-  const getStoragePrefix = `https://storage.googleapis.com/${loadConfiguration().processedVideoBucketName}`;
+
+  const config = loadConfiguration();
+	const getStoragePrefix = config.isCloudEnabled
+		? `https://storage.googleapis.com/${config.processedVideoBucketName}`
+		: config.localProcessedVideoPath;
 
 	return (
 		<div className={styles.main}>
