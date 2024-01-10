@@ -40,3 +40,4 @@ Problem solving
 - firestore not available in central1 as single region (use next best us-west1)
 - firebase-admin / functions peer issue (downgrade to v11.0.0)
 - [add unresolved host for user photo URL](https://nextjs.org/docs/messages/next-image-unconfigured-host)
+- Refreshing content (use [time-based revalidation](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#time-based-revalidation))

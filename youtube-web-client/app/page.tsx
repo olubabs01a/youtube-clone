@@ -12,7 +12,6 @@ export default async function Home() {
 				<>
 					<Link key={video.id} href={`/watch?v=${video.filename}`}>
 						<Image
-							key={video.id}
 							src={`/thumbnail.png`}
 							className={styles.thumbnail}
 							alt="video"
@@ -20,7 +19,7 @@ export default async function Home() {
 							height={80}
 						/>
 					</Link>
-					<div key={video.id} className={styles.description}>
+					<div className={styles.description}>
 						{video.title && <p>{video.title}</p>}
 						{
 							<p>
@@ -33,3 +32,6 @@ export default async function Home() {
 		</main>
 	);
 }
+
+// Refresh page every 30 seconds
+export const revalidate = 30;
