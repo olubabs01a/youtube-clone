@@ -1,0 +1,9 @@
+.thumbnail {
+    margin: 0 1em;
+    padding-top: 1em;
+}
+
+.description {
+    margin-left: 1em;
+    font-style: italic;
+}

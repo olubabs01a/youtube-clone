@@ -1,8 +1,9 @@
-import {getFunctions, httpsCallable} from "firebase/functions";
-
-const functions = getFunctions();
+import { httpsCallable } from "firebase/functions";
+import { functions } from ".";
 
 const generateUploadUrl = httpsCallable(functions, "generateUploadUrl");
+const getUserVideosFunction = httpsCallable(functions, "getUserVideos");
+const getAllVideosFunction = httpsCallable(functions, "getAllVideos");
 
 export async function uploadVideo(file: File) {
   const response: any = await generateUploadUrl({
@@ -19,4 +20,25 @@ export async function uploadVideo(file: File) {
   });
 
   return;
+}
+
+type ProcessStatus = "processing" | "completed" | "error";
+
+interface Video {
+  id?: string,
+  uid?: string,
+  filename?: string,
+  status?: ProcessStatus,
+  title?: string,
+  description?: string
+}
+
+export async function getAllVideos() {
+  const response = await getAllVideosFunction();
+  return response.data as Video[];
+}
+
+export async function getUserVideos() {
+  const response = await getUserVideosFunction();
+  return response.data as Video[];
 }
