@@ -25,9 +25,29 @@ export default function NavBar() {
 			<Link className={styles.logoContainer} href="/">
 				<Image width={90} height={20} src="/youtube-logo.svg" alt="YouTube Logo" />
 			</Link>
+			{user?.displayName && (
+				<p>
+					<i>Welcome, {user?.displayName.split(" ")[0]}!</i>
+				</p>
+			)}
 			<div className={styles.action}>
 				{user !== null && <Upload />}
 				<SignInOut user={user} />
+				{user?.photoURL ? (
+					<Image
+						className={styles.profile}
+						width={35}
+						height={35}
+						src={user?.photoURL}
+						alt="user-profile"
+					/>
+				) : (
+					user?.displayName && (
+						<circle width={35}>
+							{user?.displayName.split(" ")[0][0].toUpperCase()}
+						</circle>
+					)
+				)}
 			</div>
 		</nav>
 	);
