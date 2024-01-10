@@ -14,8 +14,9 @@ A simplified video sharing platform
 1. Use Terraform to spin up GCP resources
 1. Secure Configuration - limit hardcoded values
 1. Failed conversion retry limit - UI/email alert?
+1. Allow users to add title and description
+1. Include video timestamp
 1. Multi-video uploads
-1. Add timer to show countdown to upload URL expiration
 1. Add object lifecycle rules for storage buckets (make it trendy for a few hours - someone using an old url should see ew that's so last season)
 1. Split config into global vs local to resolve duplicates? Add global util
 1. Look into deployment manager configuration
@@ -24,6 +25,7 @@ A simplified video sharing platform
 1. Enable requester pays
 1. See latest videos converted
 1. Allow others to see your video for 24 hours
+1. Allow user feedback - upvote, downvote, comments
 1. Regenerate 360p - see your latest uploads
 1. Jupyter Notebook to test conversion!!!
 - They can sign-in with Google
