@@ -1,5 +1,3 @@
-import { isNullOrEmptyString } from "../util";
-
 export interface Config {
   isCloudEnabled: boolean;
   enableRequesterPays: boolean;
@@ -21,34 +19,24 @@ let config: Config = require("./config.json");
 export function loadConfiguration(): Config {
   let validationErrors: string[] = [];
 
-  if (isNullOrEmptyString(process.env.localRawVideoPath || config.localRawVideoPath)) {
+  if (!config.localRawVideoPath) {
     validationErrors.push("localRawVideoPath");
-  } else if (isNullOrEmptyString(process.env.localRawVideoPath) === false) {
-    config.localRawVideoPath = process.env.localRawVideoPath;
   }
 
-  if (isNullOrEmptyString(process.env.localProcessedVideoPath || config.localProcessedVideoPath)) {
+  if (!config.localProcessedVideoPath) {
     validationErrors.push("localProcessedVideoPath");
-  } else if (isNullOrEmptyString(process.env.localProcessedVideoPath) === false) {
-    config.localProcessedVideoPath = process.env.localProcessedVideoPath;
   }
 
-  if (isNullOrEmptyString(process.env.rawVideoBucketName || config.rawVideoBucketName)) {
+  if (!config.rawVideoBucketName) {
     validationErrors.push("rawVideoBucketName");
-  } else if (isNullOrEmptyString(process.env.rawVideoBucketName) === false) {
-    config.rawVideoBucketName = process.env.rawVideoBucketName;
   }
 
-  if (isNullOrEmptyString(process.env.processedVideoBucketName || config.processedVideoBucketName)) {
+  if (!config.processedVideoBucketName) {
     validationErrors.push("processedVideoBucketName");
-  } else if (isNullOrEmptyString(process.env.processedVideoBucketName) === false) {
-    config.processedVideoBucketName = process.env.processedVideoBucketName;
   }
 
-  if (isNullOrEmptyString(process.env.videoCollectionId || config.videoCollectionId)) {
+  if (!config.videoCollectionId) {
     validationErrors.push("videoCollectionId");
-  } else if (isNullOrEmptyString(process.env.videoCollectionId) === false) {
-    config.videoCollectionId = process.env.videoCollectionId;
   }
 
   if (config.maxRetryCount <= 0) {

@@ -14,19 +14,19 @@ import config = require("./config.json");
 export function loadConfiguration(): Config {
   const validationErrors: string[] = [];
 
-  if (config.gcpProjectId ?? "" === "") {
+  if (!config.gcpProjectId) {
     validationErrors.push("gcpProjectId");
   }
 
-  if (config.userCollectionId ?? "" === "") {
+  if (!config.userCollectionId) {
     validationErrors.push("userCollectionId");
   }
 
-  if (config.videoCollectionId ?? "" === "") {
+  if (!config.videoCollectionId) {
     validationErrors.push("videoCollectionId");
   }
 
-  if (config.rawVideoBucketName ?? "" === "") {
+  if (!config.rawVideoBucketName) {
     validationErrors.push("rawVideoBucketName");
   }
 

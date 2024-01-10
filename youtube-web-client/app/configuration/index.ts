@@ -8,6 +8,7 @@ interface FirebaseConfig {
 export interface Config {
   firebase: FirebaseConfig;
   gcpProjectId: string;
+  processedVideoBucketName: string;
 }
 
 let config: Config = require("./config.json");
@@ -19,23 +20,27 @@ let config: Config = require("./config.json");
 export function loadConfiguration(): Config {
   let validationErrors: string[] = [];
 
-  if (config.gcpProjectId ?? "" === "" ) {
+  if (!config.gcpProjectId) {
     validationErrors.push("gcpProjectId");
   }
 
-  if (config.firebase.apiKey ?? "" === "" ) {
+  if (!config.processedVideoBucketName) {
+    validationErrors.push("processedVideoBucketName");
+  }
+
+  if (!config.firebase.apiKey) {
     validationErrors.push("firebase:apiKey");
   }
 
-  if (config.firebase.authDomain ?? "" === "" ) {
+  if (!config.firebase.authDomain) {
     validationErrors.push("firebase:authDomain");
   }
 
-  if (config.firebase.appId ?? "" === "" ) {
+  if (!config.firebase.appId) {
     validationErrors.push("firebase:appId");
   }
 
-  if (config.firebase.measurementId ?? "" === "" ) {
+  if (!config.firebase.measurementId) {
     validationErrors.push("firebase:measurementId");
   }
 
