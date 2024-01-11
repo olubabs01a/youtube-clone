@@ -1,6 +1,5 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, User } from "firebase/auth";
 import { loadConfiguration } from "@/configuration";
 import { getFunctions } from "firebase/functions";
@@ -12,7 +11,6 @@ const firebaseConfig = { ...config.firebase, projectId: config.gcpProjectId };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const auth = getAuth(app);
 
 export const functions = getFunctions();
@@ -33,7 +31,7 @@ export function signOut() {
 }
 
 /** Trigger a callback when user's state changes.
- * @returns {Unsubscribe} A functino to unsubscribe callback.
+ * @returns {Unsubscribe} A function to unsubscribe callback.
  */
 export function onAuthStateChangedHelper(callback: (user: User | null) => void) {
   return onAuthStateChanged(auth, callback);

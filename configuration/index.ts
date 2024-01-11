@@ -70,7 +70,7 @@ export function loadConfiguration(): Config {
 
   if (config.maxRetryCount <= 0) {
     config.maxRetryCount = 0;
-    console.log(`Maximum retry count is set to '${config.maxRetryCount}'.`);
+    console.debug(`Maximum retry count is set to '${config.maxRetryCount}'.`);
   }
 
   switch (process.env.isCloudEnabled?.toLowerCase() || "") {
@@ -85,7 +85,9 @@ export function loadConfiguration(): Config {
       break;
 
     default:
-      console.log(`Cloud enabled status is set to '${config.isCloudEnabled}'.`);
+      console.debug(
+        `Cloud enabled status is set to '${config.isCloudEnabled}'.`
+      );
       break;
   }
 

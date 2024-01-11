@@ -61,6 +61,7 @@ export const getUserVideos = onCall({maxInstances: 1}, async (request) => {
   const querySnapshot =
     await firestore
       .collection(config.videoCollectionId)
+      .where("status", "==", "completed")
       .where("uid", "==", request.auth.uid).get();
 
   return querySnapshot.docs.map((doc) => doc.data());
@@ -68,13 +69,8 @@ export const getUserVideos = onCall({maxInstances: 1}, async (request) => {
 
 export const getAllVideos = onCall({maxInstances: 1}, async () => {
   const querySnapshot =
-    await firestore.collection(config.videoCollectionId).limit(10).get();
+    await firestore.collection(config.videoCollectionId)
+      .where("status", "==", "completed")
+      .limit(10).get();
   return querySnapshot.docs.map((doc) => doc.data());
-});
-
-export const getUploaderName = onCall({maxInstances: 1}, async (request) => {
-  const name = await firestore.collection(config.userCollectionId)
-    .where("uid", "==", request.data.uid).limit(1).select("uname").get();
-
-  return name.docs[0].data();
 });
