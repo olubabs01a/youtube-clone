@@ -33,5 +33,5 @@ export default async function Home() {
 	);
 }
 
-// Refresh page every 30 seconds
-export const revalidate = 30;
+// Refresh page every 10 seconds
+export const revalidate = 10;
