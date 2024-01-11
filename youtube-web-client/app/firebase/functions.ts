@@ -1,5 +1,5 @@
 import { httpsCallable } from "firebase/functions";
-import { Video } from "@types";
+import { Video } from "@/types";
 import { functions } from ".";
 
 const generateUploadUrl = httpsCallable(functions, "generateUploadUrl");

@@ -2,7 +2,7 @@ import * as functions from "firebase-functions";
 import * as firebase from "firebase-admin";
 import {Storage} from "@google-cloud/storage";
 import {onCall} from "firebase-functions/v2/https";
-import {loadConfiguration} from "@configuration";
+import {loadConfiguration} from "../configuration";
 
 firebase.initializeApp();
 
@@ -73,8 +73,8 @@ export const getAllVideos = onCall({maxInstances: 1}, async () => {
 });
 
 export const getUploaderName = onCall({maxInstances: 1}, async (request) => {
-  const name = 
-    await firestore.collection(config.userCollectionId)
+  const name = await firestore.collection(config.userCollectionId)
     .where("uid", "==", request.data.uid).limit(1).select("uname").get();
+
   return name.docs[0].data();
 });

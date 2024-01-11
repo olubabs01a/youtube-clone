@@ -3,7 +3,7 @@
 import styles from "./page.module.css";
 
 import { useSearchParams } from "next/navigation";
-import { loadConfiguration } from "@configuration";
+import { loadConfiguration } from "@/configuration";
 
 export default function Watch() {
 	const videoSrc = useSearchParams().get("v");

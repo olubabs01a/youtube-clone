@@ -1,14 +1,14 @@
 /**
- * @param obj - Object to validate as non-null.
- * @returns {boolean}
+ * @param {any} obj - Object to validate as non-null.
+ * @return {boolean}
  */
 export function isNullOrUndefined(obj: any): obj is null | undefined {
   return obj === null || obj === undefined || typeof obj === "undefined";
 }
 
 /**
- * @param obj - Object to validate as non-null.
- * @returns {boolean}
+ * @param {any} obj - Object to validate as non-null.
+ * @return {boolean}
  */
 export function isNullOrEmptyObject(obj: any): obj is null | undefined {
   if (isNullOrUndefined(obj)) {
@@ -21,8 +21,8 @@ export function isNullOrEmptyObject(obj: any): obj is null | undefined {
 }
 
 /**
- * @param obj - Object to validate as non-empty string.
- * @returns {boolean}
+ * @param {any} obj - Object to validate as non-empty string.
+ * @return {boolean}
  */
 export function isNullOrEmptyString(obj: any): obj is null | undefined {
   if (isNullOrUndefined(obj)) {

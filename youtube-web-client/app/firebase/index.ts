@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, User } from "firebase/auth";
-import { loadConfiguration } from "@configuration";
+import { loadConfiguration } from "@/configuration";
 import { getFunctions } from "firebase/functions";
 
 // Your web app's Firebase configuration

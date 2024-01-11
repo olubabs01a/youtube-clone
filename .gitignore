@@ -4,3 +4,6 @@ dist
 *.js
 *.lock
 *.log
+**/configuration/*
+**/types/*
+**/utils/*

@@ -19,14 +19,14 @@ export interface Config {
   gcpProjectId: string;
 }
 
-let config: Config = require("./config.json");
+import config from "./config.json";
 
 /**
  * Loads and validates local and environment configuration variables provided.
- * @returns {Config} A configuration object
+ * @return {Config} A configuration object
  */
 export function loadConfiguration(): Config {
-  let validationErrors: string[] = [];
+  const validationErrors: string[] = [];
 
   if (!config.localRawVideoPath) {
     validationErrors.push("localRawVideoPath");
@@ -91,7 +91,7 @@ export function loadConfiguration(): Config {
 
   // Throw error if any validation errors recorded.
   if (validationErrors.length > 0) {
-    const missingValues = `${validationErrors.map(e => `'${e}'`).join()}`;
+    const missingValues = `${validationErrors.map((e) => `'${e}'`).join()}`;
     const errorMessage = `Missing configuration values for: ${missingValues}`;
 
     console.error(errorMessage);

@@ -1,5 +1,5 @@
-import { loadConfiguration } from "@configuration";
-import { Video } from "@types";
+import { loadConfiguration } from "./configuration";
+import { Video } from "./types";
 import { credential } from "firebase-admin";
 import { initializeApp } from "firebase-admin/app";
 import { FieldValue, Firestore } from "firebase-admin/firestore";

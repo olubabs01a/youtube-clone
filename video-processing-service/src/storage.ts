@@ -2,8 +2,8 @@ import { Storage } from "@google-cloud/storage";
 import fs from "fs";
 import ffmpegStatic from "ffmpeg-static";
 import ffmpeg from "fluent-ffmpeg";
-import { loadConfiguration } from "@configuration";
-import { isNullOrEmptyString, isNullOrUndefined } from "@util";
+import { loadConfiguration } from "./configuration";
+import { isNullOrEmptyString } from "./utils";
 
 // Import configuration
 const config = loadConfiguration();
@@ -115,7 +115,7 @@ export async function uploadProcessedVideo(fileName: string) {
 
   await bucket.file(fileName).makePublic();
 
-  console.log(`'${localRawVideoPath}/${fileName}' uploaded to 'gs://${processedVideoBucketName}/${fileName}'`
+  console.log(`'${localProcessedVideoPath}/${fileName}' uploaded to 'gs://${processedVideoBucketName}/${fileName}'`
   );
 }
 
