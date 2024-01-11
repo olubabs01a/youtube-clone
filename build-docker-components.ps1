@@ -29,7 +29,9 @@ param(
     [Parameter(Mandatory, HelpMessage = "Image destination, e.g. 'remote repo/image name'")]
     $TargetImageName,
     [bool]
-    $ShouldPush = $false
+    $ShouldPush = $false,
+    [bool]
+    $CleanupConfigDirs = $false
 )
 
 $ErrorActionPreference = 'STOP'
@@ -41,9 +43,6 @@ $lastSlash = getLastSlashIndex $Component
 $rootDir = $Component.substring(0, $lastSlash)
 Write-Host "`nBuilding '$rootDir'..."
 
-# Copy required folders
-$preReqs | ForEach-Object { Copy-Item -Path $_ -Destination $Component -Recurse -Force }
-
 Push-Location $rootDir
 
 try {
@@ -54,5 +53,10 @@ try {
     }
 }
 finally {
+    if ($CleanupConfigDirs -eq $TRUE) {
+        # Clean up config folders
+        . ".\cleanupDirs.ps1" $Component
+    }
+
     Pop-Location
 }
