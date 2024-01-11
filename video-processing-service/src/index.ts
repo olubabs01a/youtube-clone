@@ -44,12 +44,12 @@ app.post("/process-video", async (req, res) => {
     });
   }
 
-  // Download raw video from Cloud Storage
-  if (config.isCloudEnabled) {
-    await downloadRawVideo(inputFileName);
-  }
-
   try {
+    // Download raw video from Cloud Storage
+    if (config.isCloudEnabled) {
+      await downloadRawVideo(inputFileName);
+    }
+
     // Convert the video to 360p
     await convertVideo(inputFileName, outputFileName);
 
