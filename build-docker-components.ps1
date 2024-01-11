@@ -53,6 +53,8 @@ try {
     }
 }
 finally {
+    $ErrorActionPreference = 'Continue'
+
     if ($CleanupConfigDirs -eq $TRUE) {
         # Clean up config folders
         . ".\cleanupDirs.ps1" $Component
