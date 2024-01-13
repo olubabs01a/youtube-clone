@@ -33,3 +33,7 @@ export function isNullOrEmptyString(obj: any): obj is null | undefined {
 
   return obj.trim().length === 0;
 }
+
+export function loaderProp({src}: any) {
+  return src;
+}

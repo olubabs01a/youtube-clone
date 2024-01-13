@@ -8,7 +8,7 @@ import { User } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { onAuthStateChangedHelper } from "../firebase";
 import Upload from "./upload";
-import { isNullOrEmptyString } from "@/utils";
+import { isNullOrEmptyString, loaderProp } from "@/utils";
 
 export default function NavBar() {
   const [user, setUser] = useState<User | null>(null);
@@ -39,7 +39,8 @@ export default function NavBar() {
             className={styles.profile}
             width={35}
             height={35}
-            src={user?.photoURL}
+            src={user.photoURL}
+            loader={loaderProp}
             alt="user-profile"
           />
         ) : (
