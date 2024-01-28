@@ -12,9 +12,11 @@ A simplified video sharing platform
 
 ### Future Improvements
 1. Use Terraform to spin up GCP resources
+1. Use Secret Manager
 1. Failed conversion retry limit - UI/email alert?
 1. Allow users to add title and description
 1. Add notifications / video status
+1. Allow users to upload thumbnails for their videos
 1. Include video timestamp
 1. Multi-video uploads
 1. Add object lifecycle rules for storage buckets (make it trendy for a few hours - someone using an old url should see ew that's so last season)
